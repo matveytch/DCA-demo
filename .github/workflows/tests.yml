@@ -1,0 +1,26 @@
+# Run the test suite on every push and pull request.
+# Installs the exact tested versions from requirements-lock.txt, then DCA itself (editable).
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-lock.txt
+      - name: Install
+        run: |
+          python -m pip install -r requirements-lock.txt
+          python -m pip install -e ".[dev]" --no-deps
+      - name: Test
+        # Parallel (pytest-xdist): `-n auto --dist load` comes from pyproject.toml addopts.
+        run: python -m pytest -q -p no:cacheprovider

@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dca"
+version = "0.1.0"
+description = "Document Creation Automation — document packages from one Excel file (demo)"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "docxtpl>=0.16",
+    "python-docx>=1.1",
+    "openpyxl>=3.1",
+    "pydantic>=2.6",
+    "typer>=0.12",
+    "num2words>=0.5",
+    "python-dateutil>=2.9",
+    "filelock>=3.12",       # deal and ledger locks across concurrent runs
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "pytest-xdist>=3.5",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+dca = "dca.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP", "N", "RUF"]
+ignore = ["E501"]  # line length handled by formatter
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src/dca"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Tests import the code next to them, not an installed copy: moving the project
+# folder can't leave them on a stale `pip install -e` path.
+pythonpath = ["src"]
+# Parallel by default (pytest-xdist): one worker per CPU core, tests handed out one by one.
+# Module-scoped fixtures only read data, so a worker recomputing one is harmless.
+# Debug with `-n 0`.
+addopts = "-v --tb=short -n auto --dist load"

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Testing and tools
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Claude Code: personal local permissions (the shared settings.json is committed)
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Word/Excel owner files
+~$*
+
+# Operator data: deals, Data/, company folders (data root of dca.toml) — never in git
+workspace/
+
+# Filelock sentinel files (zero-byte, created next to locked artifacts)
+*.lock
+
+# Secrets
+*.env
+.env.local
+secrets/
+
+# Demo preparation notes: brief, worklist, denylist (never committed)
+_handoff/

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# The `dca` command without `pip install`: runs the code in src/ next to this file,
+# so it keeps working after the project folder is moved.
+#   from the repository folder:  ./dca <command> [args]
+# Picks the first Python 3.11+ that has the DCA dependencies (same list as the runners).
+CODE="$(cd "$(dirname "$0")" && pwd)"
+
+for py in python3 /opt/miniconda3/bin/python3 "$HOME/miniconda3/bin/python3" \
+          /opt/homebrew/bin/python3 /usr/local/bin/python3; do
+    if command -v "$py" >/dev/null 2>&1 && PYTHONPATH="$CODE/src" "$py" -c \
+        'import sys, dca.cli; sys.exit(sys.version_info < (3, 11))' >/dev/null 2>&1; then
+        PYTHONPATH="$CODE/src${PYTHONPATH:+:$PYTHONPATH}" exec "$py" -m dca "$@"
+    fi
+done
+echo "❌ No Python 3.11+ with the DCA dependencies found." >&2
+echo "   Install them once:  python3 -m pip install -r \"$CODE/requirements-lock.txt\"" >&2
+exit 1

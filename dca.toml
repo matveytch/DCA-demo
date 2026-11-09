@@ -1,0 +1,4 @@
+# Data-root marker of the code folder (see src/dca/paths.py).
+# The operator's data (deals, Data/, company folders) lives in workspace/ next to
+# the code; workspace/ is in .gitignore and never enters the repository.
+data_dir = "workspace"

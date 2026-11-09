@@ -1,0 +1,43 @@
+# Exact versions DCA was last tested with.
+# Python 3.13, macOS. Reproduce a working install:
+#   python3 -m pip install -r requirements-lock.txt && python3 -m pip install -e ".[dev]" --no-deps
+# Regenerate after upgrading: python3 -m pip freeze, keep only the packages listed here.
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+Pygments==2.19.1
+annotated-doc==0.0.4
+annotated-types==0.6.0
+ast_serialize==0.5.0
+click==8.4.1
+coverage==7.14.0
+docopt==0.6.2
+docxtpl==0.20.2
+et_xmlfile==2.0.0
+execnet==2.1.2
+filelock==3.29.4
+iniconfig==2.3.0
+librt==0.11.0
+lxml==6.0.2
+markdown-it-py==4.0.0
+mdurl==0.1.2
+mypy==2.1.0
+mypy_extensions==1.1.0
+num2words==0.5.14
+openpyxl==3.1.5
+packaging==25.0
+pathspec==1.1.1
+pluggy==1.5.0
+pydantic==2.12.2
+pydantic_core==2.41.4
+pytest-cov==7.1.0
+pytest-xdist==3.8.0
+pytest==9.0.3
+python-dateutil==2.9.0.post0
+python-docx==1.2.0
+rich==14.2.0
+ruff==0.15.14
+shellingham==1.5.0
+six==1.17.0
+typer==0.25.1
+typing-inspection==0.4.2
+typing_extensions==4.15.0
